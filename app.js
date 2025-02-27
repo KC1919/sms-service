@@ -17,7 +17,7 @@ app.use('/api/v1/sms', SMSRouter);
 app.get('/health', (req, res) => {
     try {
         res.status(200).json({
-            message: 'Service up and running'
+            message: 'SMS Service up and running'
         });
     } catch (error) {
         console.log('Failed to send sms noti', error);
