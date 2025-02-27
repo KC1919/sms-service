@@ -10,7 +10,7 @@ class SMSController {
         try {
             const { data } = req.body;
 
-            const { message } = data;
+            const { message } = data?.content;
 
             await SMS.sendSMS(message);
             res.status(200).json({
