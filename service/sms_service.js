@@ -8,15 +8,15 @@ class SMSService {
         this.client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
     }
 
-    sendSMS = async (messageData) => {
+    sendSMS = async ({ message, mobile }) => {
         try {
-            const message = await this.client.messages.create({
-                body: messageData,
+            const messageResp = await this.client.messages.create({
+                body: message,
                 from: process.env.TWILIO_PHONE_NUMBER, // Your Twilio number
-                to: "+916263792790" // Receiver's phone number
+                to: mobile // Receiver's phone number
             });
 
-            console.log("SMS Sent! Message SID:", message.sid);
+            console.log("SMS Sent! Message SID:", messageResp.sid);
         } catch (error) {
             console.error("Error sending SMS:", error);
         }

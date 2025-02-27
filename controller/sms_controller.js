@@ -10,9 +10,9 @@ class SMSController {
         try {
             const { data } = req.body;
 
-            const { message } = data?.content;
+            const { message, mobile } = data?.content;
 
-            await SMS.sendSMS(message);
+            await SMS.sendSMS({message, mobile});
             res.status(200).json({
                 message: 'Response from sms noti service'
             })
