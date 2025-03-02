@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: 'config/.env' });
 
 import SMSRouter from './routes/sms_routes.js';
+import errorHandler from './middleware/error_handler.js';
 
 
 const app = express();
@@ -23,6 +24,8 @@ app.get('/health', (req, res) => {
         console.log('Failed to send sms noti', error);
     }
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log('SMS server listening on port:', PORT);

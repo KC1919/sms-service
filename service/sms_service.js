@@ -1,5 +1,6 @@
 import twilio from 'twilio';
 import dotenv from 'dotenv';
+import CustomError from '../utils/custom_error.js';
 dotenv.config({ path: 'config/.env' });
 
 class SMSService {
@@ -17,8 +18,10 @@ class SMSService {
             });
 
             console.log("SMS Sent! Message SID:", messageResp.sid);
+            return messageResp;
         } catch (error) {
             console.error("Error sending SMS:", error);
+            throw new CustomError('Error sending SMS, server error', 500);
         }
     }
 }
